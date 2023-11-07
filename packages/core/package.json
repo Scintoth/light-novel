@@ -1,7 +1,7 @@
 {
-  "name": "novel",
+  "name": "light-novel",
   "version": "0.1.22",
-  "description": "Notion-style WYSIWYG editor with AI-powered autocompletions",
+  "description": "Notion-style WYSIWYG editor",
   "license": "Apache-2.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -86,7 +86,6 @@
     "url": "https://github.com/steven-tey/novel/issues"
   },
   "keywords": [
-    "ai",
     "novel",
     "editor",
     "markdown",
