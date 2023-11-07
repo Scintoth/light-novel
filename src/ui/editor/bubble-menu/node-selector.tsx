@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import * as Popover from "@radix-ui/react-popover";
 import { Dispatch, FC, SetStateAction } from "react";
-import { BubbleMenuItem } from ".";
+import { BubbleMenuItem } from "./index";
 
 interface NodeSelectorProps {
   editor: Editor;

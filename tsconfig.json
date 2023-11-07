@@ -1,0 +1,14 @@
+{
+  "extends": "packages/tsconfig/react.json",
+  "include": [
+    "./packages/core"
+  ],
+  "exclude": [
+    "dist", "build", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./packages/core",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
