@@ -1,7 +1,7 @@
 {
-  "name": "novel-light",
+  "name": "novel-sans",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

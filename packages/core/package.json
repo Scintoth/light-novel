@@ -1,6 +1,6 @@
 {
-  "name": "novel-light",
-  "version": "0.1.22",
+  "name": "novel-sans",
+  "version": "0.1.28",
   "description": "Notion-style WYSIWYG editor",
   "license": "Apache-2.0",
   "main": "./dist/index.js",
@@ -80,10 +80,10 @@
   "homepage": "https://novel.sh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/steven-tey/novel.git"
+    "url": "git+https://github.com/Scintoth/light-novel.git"
   },
   "bugs": {
-    "url": "https://github.com/steven-tey/novel/issues"
+    "url": "https://github.com/Scintoth/light-novel/issues"
   },
   "keywords": [
     "novel",

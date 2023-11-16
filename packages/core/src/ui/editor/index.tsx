@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState} from "react";
 import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import { defaultEditorProps } from "./props";
-import { defaultExtensions } from "./extensions";
+import  { defaultExtensions } from "./extensions";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useDebouncedCallback } from "use-debounce";
 import { useCompletion } from "ai/react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
 import { defaultEditorContent } from "./default-content";
-import { EditorBubbleMenu } from "./bubble-menu";
+import {BubbleMenuChild, EditorBubbleMenu} from "./bubble-menu";
 import { getPrevText } from "@/lib/editor";
 import { ImageResizer } from "./extensions/image-resizer";
 import { EditorProps } from "@tiptap/pm/view";
@@ -28,6 +28,7 @@ export default function Editor({
   debounceDuration = 750,
   storageKey = "novel__content",
   disableLocalStorage = false,
+  bubbleMenuExtensions = [],
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -81,6 +82,8 @@ export default function Editor({
    * Defaults to false.
    */
   disableLocalStorage?: boolean;
+
+  bubbleMenuExtensions?: Array<BubbleMenuChild>;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -96,7 +99,7 @@ export default function Editor({
   }, debounceDuration);
 
   const editor = useEditor({
-    extensions: [...defaultExtensions, ...extensions],
+    extensions: extensions ?? defaultExtensions,
     editorProps: {
       ...defaultEditorProps,
       ...editorProps,
@@ -213,7 +216,7 @@ export default function Editor({
         }}
         className={className}
       >
-        {editor && <EditorBubbleMenu editor={editor} />}
+        {editor && <EditorBubbleMenu editor={editor} modules={bubbleMenuExtensions} />}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
       </div>

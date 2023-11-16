@@ -36,16 +36,16 @@ https://github.com/steven-tey/novel/assets/28986134/2099877f-4f2b-4b1c-8782-5d80
 
 ## Installation
 
-To use Novel in a project, you can run the following command to install the `novel` [NPM package](https://www.npmjs.com/package/novel):
+To use Novel in a project, you can run the following command to install the `novel-sans` [NPM package](https://www.npmjs.com/package/novel-sans):
 
 ```
-npm i novel
+npm i novel-sans
 ```
 
 Then, you can use it in your code like this:
 
 ```jsx
-import { Editor } from "novel";
+import { Editor } from "novel-sans";
 
 export default function App() {
   return <Editor />;
@@ -54,20 +54,27 @@ export default function App() {
 
 The `Editor` is a React component that takes in the following props:
 
-| Prop                  | Type                        | Description                                                                                                                                                                                | Default                                                                                                                             |
-| --------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `completionApi`       | `string`                    | The API route to use for the OpenAI completion API.                                                                                                                                        | `/api/generate`                                                                                                                     |
-| `className`           | `string`                    | Editor container classname.                                                                                                                                                                | `"relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"` |
-| `defaultValue`        | `JSONContent` or `string`   | The default value to use for the editor.                                                                                                                                                   | [`defaultEditorContent`](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/default-content.tsx)             |
-| `extensions`          | `Extension[]`               | A list of extensions to use for the editor, in addition to the [default Novel extensions](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/extensions/index.tsx). | `[]`                                                                                                                                |
-| `editorProps`         | `EditorProps`               | Props to pass to the underlying Tiptap editor, in addition to the [default Novel editor props](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/props.ts).        | `{}`                                                                                                                                |
-| `onUpdate`            | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated.                                                                                                                         | `() => {}`                                                                                                                          |
-| `onDebouncedUpdate`   | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated, but only after the defined debounce duration.                                                                           | `() => {}`                                                                                                                          |
-| `debounceDuration`    | `number`                    | The duration (in milliseconds) to debounce the `onDebouncedUpdate` callback.                                                                                                               | `750`                                                                                                                               |
-| `storageKey`          | `string`                    | The key to use for storing the editor's value in local storage.                                                                                                                            | `novel__content`                                                                                                                    |
-| `disableLocalStorage` | `boolean`                   | Enabling this option will prevent read/write content from/to local storage.                                                                                                                | `false`                                                                                                                             |
+| Prop                   | Type                        | Description                                                                                                                                                                                                                            | Default                                                                                                                             |
+|------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `className`            | `string`                    | Editor container classname.                                                                                                                                                                                                            | `"relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"` |
+| `defaultValue`         | `JSONContent` or `string`   | The default value to use for the editor.                                                                                                                                                                                               | [`defaultEditorContent`](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/default-content.tsx)             |
+| `extensions`           | `Extension[]`               | A list of extensions to use for the editor, can be used to override and add to the [default Novel extensions](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/extensions/index.tsx).                         | `[]`                                                                                                                                |
+| `editorProps`          | `EditorProps`               | Props to pass to the underlying Tiptap editor, in addition to the [default Novel editor props](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/props.ts).                                                    | `{}`                                                                                                                                |
+| `onUpdate`             | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated.                                                                                                                                                                     | `() => {}`                                                                                                                          |
+| `onDebouncedUpdate`    | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated, but only after the defined debounce duration.                                                                                                                       | `() => {}`                                                                                                                          |
+| `debounceDuration`     | `number`                    | The duration (in milliseconds) to debounce the `onDebouncedUpdate` callback.                                                                                                                                                           | `750`                                                                                                                               |
+| `storageKey`           | `string`                    | The key to use for storing the editor's value in local storage.                                                                                                                                                                        | `novel__content`                                                                                                                    |
+| `disableLocalStorage`  | `boolean`                   | Enabling this option will prevent read/write content from/to local storage.                                                                                                                                                            | `false`                                                                                                                             |
+| `bubbleMenuExtensions` | `BubbleMenuChild[]`         | A list of additional children that can be placed wherever needed in the bubble menu. The default bubble menu children have the indexes between 0-3, setting your Children's indexes between these numbers will affect their placement. | `[]`                                                                                                                                |
 
-> **Note**: Make sure to define an API endpoint that matches the `completionApi` prop (default is `/api/generate`). This is needed for the AI autocompletions to work. Here's an example: https://github.com/steven-tey/novel/blob/main/apps/web/app/api/generate/route.ts
+### Bubble Menu Child Definition
+```js
+interface BubbleMenuChild {
+    Component: ReactNode;
+    index: number;
+}
+```
+
 
 Here's an example application: https://github.com/steven-tey/novella
 
@@ -113,7 +120,6 @@ Novel is built on the following stack:
 
 - [Next.js](https://nextjs.org/) – framework
 - [Tiptap](https://tiptap.dev/) – text editor
-- [OpenAI](https://openai.com/) - AI completions
 - [Vercel AI SDK](https://sdk.vercel.ai/docs) – AI library
 - [Vercel](https://vercel.com) – deployments
 - [TailwindCSS](https://tailwindcss.com/) – styles
@@ -123,8 +129,8 @@ Novel is built on the following stack:
 
 Here's how you can contribute:
 
-- [Open an issue](https://github.com/steven-tey/novel/issues) if you believe you've encountered a bug.
-- Make a [pull request](https://github.com/steven-tey/novel/pull) to add new features/make quality-of-life improvements/fix bugs.
+- [Open an issue](https://github.com/Scintoth/light-novel/issues) if you believe you've encountered a bug.
+- Make a [pull request](https://github.com/Scintoth/light-novel/pull) to add new features/make quality-of-life improvements/fix bugs.
 
 <a href="https://github.com/steven-tey/novel/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=steven-tey/novel" />

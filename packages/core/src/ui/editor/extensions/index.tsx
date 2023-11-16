@@ -142,3 +142,7 @@ export const defaultExtensions = [
   CustomKeymap,
   DragAndDrop,
 ];
+
+
+const DefaultExtensions = defaultExtensions;
+export default DefaultExtensions;
